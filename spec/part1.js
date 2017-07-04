@@ -78,6 +78,7 @@
       });
 
       it('should not mutate the input array', function() {
+
         var input = [1, 2, 3, 4, 5];
         var result = _.each(input, _.identity);
 
