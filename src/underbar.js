@@ -361,6 +361,14 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    return collection.reduce(function(result, el) {
+      if (typeof functionOrKey === 'function') {
+        result.push(functionOrKey.apply(el, args));
+      }else if (el[functionOrKey]) {
+        result.push(el[functionOrKey].apply(el, args));
+      }
+      return result;
+    }, []);
   };
 
   // Sort the object's values by a criterion produced by an iterator.
@@ -368,6 +376,7 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -375,24 +384,79 @@
   //
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
+  // var names = ['moe', 'larry', 'curly'];
+  // var ages = [30, 40, 50];
+  // var leaders = [true];
   _.zip = function() {
+    // var array = [];
+    // //
+    // for(var i = 0; i < args.length; i++){
+    //   for(var j = 0; j < args[i].length; j++){
+    //     array.push(args[i][j], args[])
+    //   }
+    // }
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
+  //[1, [2], [3, [[[4]]]]]
   _.flatten = function(nestedArray, result) {
+
+  // if(nestedArray.length === undefined){
+  //   return [];
+  // }
+
+  // for(var i = 0; i < nestedArray.length; i++){
+  //   if(Array.isArray(nestedArray[i])){
+  //     nestedArray[i].concat(_.flatten(nestedArray[i+1]));
+  //   }
+  // }
+
+  // return nestedArray;
+
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
+
   _.intersection = function() {
+    // for(var i = 0; i < args.length; i++){
+    //   for(var j = 0; i < args[i].length; j++){
+    //     for(var k = 0; i < args[i])
+    //   }
+    // }
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
+
   _.difference = function(array) {
+    var rejects = [];
+
+    var args = Array.prototype.slice.call(arguments).slice(1);
+    //loop through the first array
+    for(var i = 0; i < array.length; i++){
+      //loop through the remaining arrays
+      for(var j = 0; j < args.length; j++){
+        //if any of the numbers from the first array
+        for(var k = 0; k < args[j].length; k++){
+          if(array[i] === args[j][k]){
+            rejects.push(array[i]);
+          }
+        }
+      }
+    }
+
+    for(var i = 0; i < rejects.length; i++){
+      for(var j = 0; j < array.length; j++){
+        if(rejects[i] === array[j]){
+          array.splice(j, 1);
+        }
+      }
+    }
+    return array;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
