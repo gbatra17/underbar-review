@@ -38,13 +38,16 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if (n === undefined) {
-      return array[array.length - 1];
-    } else if (n === 0) {
-      return [];
-    } else {
-      return array.slice(-n);
-    }
+    //this is the right way to do it
+    // if (n === undefined) {
+    //   return array[array.length - 1];
+    // } else if (n === 0) {
+    //   return [];
+    // } else {
+    //   return array.slice(-n);
+    // }
+    //this is just code golf
+    return n === undefined ? array[array.length - 1] : n === 0 ? [] : array.slice(-n);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -376,7 +379,9 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    if(iterator === 'length'){
 
+    }
   };
 
   // Zip together two or more arrays with elements of the same index
