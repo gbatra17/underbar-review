@@ -367,7 +367,7 @@
     return collection.reduce(function(result, el) {
       if (typeof functionOrKey === 'function') {
         result.push(functionOrKey.apply(el, args));
-      }else if (el[functionOrKey]) {
+      } else if (el[functionOrKey]) {
         result.push(el[functionOrKey].apply(el, args));
       }
       return result;
@@ -379,7 +379,7 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-    if(iterator === 'length'){
+    if (iterator === 'length') {
 
     }
   };
@@ -409,17 +409,17 @@
   //[1, [2], [3, [[[4]]]]]
   _.flatten = function(nestedArray, result) {
 
-  // if(nestedArray.length === undefined){
-  //   return [];
-  // }
+    // if(nestedArray.length === undefined){
+    //   return [];
+    // }
 
-  // for(var i = 0; i < nestedArray.length; i++){
-  //   if(Array.isArray(nestedArray[i])){
-  //     nestedArray[i].concat(_.flatten(nestedArray[i+1]));
-  //   }
-  // }
+    // for(var i = 0; i < nestedArray.length; i++){
+    //   if(Array.isArray(nestedArray[i])){
+    //     nestedArray[i].concat(_.flatten(nestedArray[i+1]));
+    //   }
+    // }
 
-  // return nestedArray;
+    // return nestedArray;
 
   };
 
@@ -427,11 +427,27 @@
   // every item shared between all the passed-in arrays.
 
   _.intersection = function() {
-    // for(var i = 0; i < args.length; i++){
-    //   for(var j = 0; i < args[i].length; j++){
-    //     for(var k = 0; i < args[i])
-    //   }
-    // }
+    //create an array of the arguments
+    var args = Array.from(arguments);
+    //concat all the arrays within the arguments
+    var argsConcat = args.reduce((acc, arr) => acc.concat(arr), []);
+    //create a tally object
+    var countedNums = argsConcat.reduce(function(allNums, num) {
+      if (num in allNums) {
+        allNums[num]++;
+      } else {
+        allNums[num] = 1;
+      }
+      return allNums;
+    }, {});
+    //remove the values that equal 1
+    for(var key in countedNums){
+      if(countedNums[key] === 1){
+        delete countedNums[key];
+      }
+    }
+    //return the array
+    return Object.keys(countedNums);
   };
 
   // Take the difference between one array and a number of other arrays.
@@ -442,21 +458,21 @@
 
     var args = Array.prototype.slice.call(arguments).slice(1);
     //loop through the first array
-    for(var i = 0; i < array.length; i++){
+    for (var i = 0; i < array.length; i++) {
       //loop through the remaining arrays
-      for(var j = 0; j < args.length; j++){
+      for (var j = 0; j < args.length; j++) {
         //if any of the numbers from the first array
-        for(var k = 0; k < args[j].length; k++){
-          if(array[i] === args[j][k]){
+        for (var k = 0; k < args[j].length; k++) {
+          if (array[i] === args[j][k]) {
             rejects.push(array[i]);
           }
         }
       }
     }
 
-    for(var i = 0; i < rejects.length; i++){
-      for(var j = 0; j < array.length; j++){
-        if(rejects[i] === array[j]){
+    for (var i = 0; i < rejects.length; i++) {
+      for (var j = 0; j < array.length; j++) {
+        if (rejects[i] === array[j]) {
           array.splice(j, 1);
         }
       }
@@ -469,6 +485,5 @@
   // on this function.
   //
   // Note: This is difficult! It may take a while to implement.
-  _.throttle = function(func, wait) {
-  };
+  _.throttle = function(func, wait) {};
 }());
