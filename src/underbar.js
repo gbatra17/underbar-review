@@ -379,9 +379,9 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-    if (iterator === 'length') {
-
-    }
+    // if (iterator === 'length') {
+    //
+    // }
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -409,17 +409,15 @@
   //[1, [2], [3, [[[4]]]]]
   _.flatten = function(nestedArray, result) {
 
-    // if(nestedArray.length === undefined){
-    //   return [];
-    // }
+    if(nestedArray.length === 0){
+    return [];
+  }
 
-    // for(var i = 0; i < nestedArray.length; i++){
-    //   if(Array.isArray(nestedArray[i])){
-    //     nestedArray[i].concat(_.flatten(nestedArray[i+1]));
-    //   }
-    // }
+  if(Array.isArray(nestedArray[0])){
+    return _.flatten(nestedArray[0]).concat(_.flatten(nestedArray.slice(1)));
+  }
 
-    // return nestedArray;
+  return [nestedArray[0]].concat(_.flatten(nestedArray.slice(1)));
 
   };
 
